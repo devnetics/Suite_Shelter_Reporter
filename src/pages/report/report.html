@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Contact
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <form #reportForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating color="primary">Name</ion-label>
+        <ion-input [(ngModel)]="report.name" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating color="primary">Notes</ion-label>
+        <ion-input [(ngModel)]="report.description" name="name" type="text" #description="ngModel" spellcheck="false" autocapitalize="off">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating color="primary">Email</ion-label>
+        <ion-input [(ngModel)]="report.email" name="email" type="text" #email="ngModel" spellcheck="false" autocapitalize="off">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating color="primary">Phone</ion-label>
+        <ion-input [(ngModel)]="report.phone" name="phone" type="text" #phone="ngModel" spellcheck="false" autocapitalize="off">
+        </ion-input>
+      </ion-item>
+    </form>
+  </ion-list>
+  <ion-list>  
+  <form #searchForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating color="primary">Name</ion-label>
+        <ion-input [(ngModel)]="search.name" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-row responsive-sm>        
+        <ion-col>
+          <button ion-button (click)="searchUsers()" color="light" block>Search</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+
+  <ion-list>
+    Results
+    <ion-item *ngFor="let user of users">
+      {{user.profile.name}} <button ion-button item-right (click)="sendReport(user._id)"> Report Sighting </button>        
+    </ion-item>
+  </ion-list>
+</ion-content>
