@@ -6,8 +6,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content padding>  
+  <ion-list *ngIf="!showNew">  
+    <ion-label>Find an existing person</ion-label>
+  <form #searchForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating color="primary">Name</ion-label>
+        <ion-input [(ngModel)]="search.name" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-row responsive-sm>        
+        <ion-col>
+          <button ion-button (click)="searchUsers()" color="light" block>Search</button>
+        </ion-col>
+      </ion-row>
+    </form>    
+    <ion-item *ngFor="let user of users">
+      {{user.profile.name}} <button ion-button item-right (click)="sendReport(user._id, user.profile.name)"> Report Sighting </button>        
+    </ion-item>
+  </ion-list>  
+
+  <ion-label *ngIf="!showNew"><br>or</ion-label>
+  <button ion-button clear *ngIf="!showNew" (click)="showNewFn()">Report New "at risk" person</button>
+  <ion-list *ngIf="showNew">        
     <form #reportForm="ngForm" novalidate>
       <ion-item>
         <ion-label floating color="primary">Name</ion-label>
@@ -16,7 +37,7 @@
       </ion-item>
       <ion-item>
         <ion-label floating color="primary">Notes</ion-label>
-        <ion-input [(ngModel)]="report.description" name="name" type="text" #description="ngModel" spellcheck="false" autocapitalize="off">
+        <ion-input [(ngModel)]="report.description" name="description" type="text" #description="ngModel" spellcheck="false" autocapitalize="off">
         </ion-input>
       </ion-item>
       <ion-item>
@@ -29,27 +50,11 @@
         <ion-input [(ngModel)]="report.phone" name="phone" type="text" #phone="ngModel" spellcheck="false" autocapitalize="off">
         </ion-input>
       </ion-item>
-    </form>
-  </ion-list>
-  <ion-list>  
-  <form #searchForm="ngForm" novalidate>
-      <ion-item>
-        <ion-label floating color="primary">Name</ion-label>
-        <ion-input [(ngModel)]="search.name" name="name" type="text" #name="ngModel" spellcheck="false" autocapitalize="off" required>
-        </ion-input>
-      </ion-item>
       <ion-row responsive-sm>        
         <ion-col>
-          <button ion-button (click)="searchUsers()" color="light" block>Search</button>
+          <button ion-button (click)="sendReportNewUser()" color="light" block>Submit</button>
         </ion-col>
       </ion-row>
     </form>
-  </ion-list>
-
-  <ion-list>
-    Results
-    <ion-item *ngFor="let user of users">
-      {{user.profile.name}} <button ion-button item-right (click)="sendReport(user._id)"> Report Sighting </button>        
-    </ion-item>
-  </ion-list>
+  </ion-list>  
 </ion-content>

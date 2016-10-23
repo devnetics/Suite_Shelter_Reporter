@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { ReportPage } from '../pages/report/report';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { AboutPage } from '../pages/about/about';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 const cloudSettings: CloudSettings = {
@@ -16,6 +17,7 @@ const cloudSettings: CloudSettings = {
   declarations: [
     MyApp,    
     ReportPage,
+    AboutPage,
     HomePage,
     TabsPage
   ],
@@ -27,6 +29,7 @@ const cloudSettings: CloudSettings = {
   entryComponents: [
     MyApp,    
     ReportPage,
+    AboutPage,
     HomePage,
     TabsPage
   ],
